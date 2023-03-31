@@ -1,2 +1,2 @@
-# Spring-2023-Hackathon
+# Tree Tinder
 2023 Spring JB Hunt Hackathon
