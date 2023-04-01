@@ -26,8 +26,9 @@ interface Message {
   content: string;
 }
 
-const Chat = (messages: string[]) => {
-  const oldMessages = messages['route']['params']['messages'];
+const Chat = (name: string, messages: string[]) => {
+  const treeName = name['route']['params']['name']
+  const oldMessages = name['route']['params']['messages'];
   const [input, setInput] = useState('');
   const [conversation, setConversation] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +39,8 @@ const Chat = (messages: string[]) => {
       const history = conversation
         .map((message) => `${message.role === 'user' ? 'Q:' : 'A:'} ${message.content}`)
         .join('\n\n');
-      const prompt = `You are a willow tree. The user will send you messages, and you will provide a SINGLE response that is SHORT, flirty, conversational, and environment/tree related.\n\n${history}\nQ: ${input} `;
+      const prompt = `You are a ${treeName} tree. The user will send you messages, and you will provide a SINGLE response that is SHORT, flirty, conversational, and environment/tree related.\n\n${history}\nQ: ${input} `;
+      console.log(prompt);
       const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [{
