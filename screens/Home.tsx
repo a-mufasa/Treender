@@ -23,8 +23,6 @@ const Home = () => {
       userInfo.set('trees', newMap);
       setUserInfo(userInfo);
 
-
-
     } catch {
       console.log("Bruh moment, promise error!")
     }
@@ -49,14 +47,12 @@ const Home = () => {
         </View>
 
         <CardStack
-          loop
           verticalSwipe={false}
           renderNoMoreCards={() => null}
           ref={(newSwiper): void => setSwiper(newSwiper)}
         >
           {tmp.map((item) => (
-            <Card onSwipedRight={() => callback(item)
-            }>
+            <Card onSwipedRight={() => callback(item)}>
               <CardItem
                 hasActions
                 image={item.image}
