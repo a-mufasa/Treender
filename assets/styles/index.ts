@@ -236,13 +236,6 @@ export default StyleSheet.create({
     marginHorizontal: 10,
   },
 
-  // CONTAINER - MATCHES
-  containerMatches: {
-    justifyContent: "space-between",
-    flex: 1,
-    paddingHorizontal: 10,
-  },
-
   // CONTAINER - MESSAGES
   containerMessages: {
     justifyContent: "space-between",
@@ -354,8 +347,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 16,
+    paddingVertical: 8,
   },
   contentContainer: {
+    flexGrow: 1,
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 8,
