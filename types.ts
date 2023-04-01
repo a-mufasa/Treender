@@ -39,17 +39,11 @@ export type TabBarIconT = {
 };
 
 export type DataT = {
-  id: number;
   name: string;
-  isOnline: boolean;
-  match: string;
+  match?: string;
   description: string;
-  message: string;
   image: any;
   age?: string;
   info1?: string;
-  info2?: string;
-  info3?: string;
-  info4?: string;
   location?: string;
 };

@@ -3,9 +3,10 @@ import { View, ImageBackground } from "react-native";
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import { City, Filters, CardItem } from "../components";
 import styles from "../assets/styles";
-import DEMO from "../assets/data/demo";
 import { getUserInfo, setUserInfo } from "../backend/UpdateDb";
 import { TransitionPresets } from "@react-navigation/stack";
+import { dataAR, dataWA } from "../assets/data/demo";
+import { curState } from "../backend/UpdateDb";
 
 const Home = () => {
   const [swiper, setSwiper] = useState<CardStack | null>(null);
@@ -31,6 +32,11 @@ const Home = () => {
 
   }
 
+  let tmp = dataAR
+  if (curState === "WA") {
+    tmp = dataWA
+  }
+
   return (
     <ImageBackground
       source={require("../assets/images/bg.png")}
@@ -48,8 +54,8 @@ const Home = () => {
           renderNoMoreCards={() => null}
           ref={(newSwiper): void => setSwiper(newSwiper)}
         >
-          {DEMO.map((item) => (
-            <Card key={item.id} onSwipedRight={() => callback(item)
+          {tmp.map((item) => (
+            <Card onSwipedRight={() => callback(item)
             }>
               <CardItem
                 hasActions
