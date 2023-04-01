@@ -13,6 +13,7 @@ import RNPickerSelect , { PickerStyle } from 'react-native-picker-select';
 import GetLocation from 'react-native-get-location'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { setUserInfo } from "../backend/UpdateDb";
 
 const EyeColors = ['Brown', "Amber", "Hazel","Green","Blue","Gray",];
 const pickerStyle: PickerStyle = {
@@ -71,6 +72,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
         ]);
 
         console.log(myMap);
+        setUserInfo(myMap);
 
         let obj = {
             'fn': firstname,
