@@ -13,6 +13,7 @@ import {
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_ORG_ID, OPENAI_API_KEY } from "@env";
 import styles from '../assets/styles';
+import { setUserTreeMessages } from '../backend/UpdateDb';
 
 const configuration = new Configuration({
   organization: OPENAI_ORG_ID,
@@ -90,6 +91,15 @@ const Chat = (name: string, messages: string[]) => {
   }, [oldMessages]);
 
   useEffect(() => {
+    if (conversation.length > 1) {
+      // post to db
+      var newConversation: string[] = []
+      conversation.forEach(item => {
+        newConversation.push(item.content)
+      })
+      setUserTreeMessages(treeName, newConversation)
+      console.log(conversation)
+    }
     scrollViewRef.current?.scrollToEnd({ animated: false });
   }, [conversation]);
 
