@@ -104,7 +104,7 @@ const Chat = (name: string, messages: string[]) => {
   }, [conversation]);
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container} keyboardVerticalOffset={80}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <View style={styles.statusBar} />
