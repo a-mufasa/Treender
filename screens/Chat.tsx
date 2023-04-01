@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, ActivityIndicator } from 'react-native';
 import { Configuration, OpenAIApi } from 'openai';
-import { OPENAI_ORG_ID, OPENAI_API_KEY } from "@env"
+import { OPENAI_ORG_ID, OPENAI_API_KEY } from "@env";
 import styles from '../assets/styles';
 
 const configuration = new Configuration({
