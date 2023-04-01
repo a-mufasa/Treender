@@ -7,6 +7,11 @@ import DEMO from "../assets/data/demo";
 
 const Home = () => {
   const [swiper, setSwiper] = useState<CardStack | null>(null);
+  const [swipedCards, setSwipedCards] = useState<Card[]>([]);
+
+  const callback = (item) => {
+    console.log(item);
+  }
 
   return (
     <ImageBackground
@@ -26,7 +31,8 @@ const Home = () => {
           ref={(newSwiper): void => setSwiper(newSwiper)}
         >
           {DEMO.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id} onSwipedLeft={() => callback(item)
+            }>
               <CardItem
                 hasActions
                 image={item.image}
