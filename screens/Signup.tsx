@@ -14,6 +14,8 @@ import GetLocation from 'react-native-get-location'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { setUserInfo } from "../backend/UpdateDb";
+import { GOOGLE_PLACES_API_KEY } from "@env";
+import { useNavigation } from "@react-navigation/native";
 
 const EyeColors = ['Brown', "Amber", "Hazel","Green","Blue","Gray",];
 const pickerStyle: PickerStyle = {
@@ -37,27 +39,14 @@ const pickerStyle: PickerStyle = {
   };
 
 const SignupForm:FC<{}> = ({}): ReactElement => {
+    const navigation = useNavigation();
+
     const [firstname, setFirstName] = useState("");
     const [lastname, setLastName] = useState("");
     const [description, setDescription] = useState("");
     const [eyeColor, setEyeColor] = useState("");
     const [location, setLocation] = useState({});
 
-    const getUserLocation = () =>{
-        GetLocation.getCurrentPosition({
-            enableHighAccuracy: true,
-            timeout: 60000,
-        })
-        .then(location => {
-            console.log(location);
-        })
-        .catch(error => {
-            const { code, message } = error;
-            console.warn(code, message);
-        })
-    }
-
-    // TODO: Submit button handling! Do after firebase is set up
     const submitForm = () => {
         city = location["terms"][0]["value"];
         state = location["terms"][1]["value"];
@@ -78,7 +67,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
             'ln': lastname,
             'description': description,
         }
-
+        navigation.navigate("Tab", {screen: 'Explore'});
     };
     
     return (
@@ -162,7 +151,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                             
                         }}
                         query={{
-                            key: 'AIzaSyCJAbK3Tsh-kdHoC_DKvrxkk2vxFWqV6I0',
+                            key: GOOGLE_PLACES_API_KEY,
                             language: 'en',
                             types: ['(cities)', '(regions)'],
                         }}
