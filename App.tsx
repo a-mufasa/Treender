@@ -13,31 +13,11 @@ import { TextInput, TouchableOpacity, View, StyleSheet, Text } from "react-nativ
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const signInUser = (email: string, password: string) => {
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      // ----------- call create profile screen here ----------- //
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      if (errorCode === "auth/email-already-in-use") {
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in 
-          const user = userCredential.user;
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-        });
-      }
-    });
-}
+
   
   const App = () => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [signedUp, setSignedUp] = useState(false);
     const [email, setEmail] = useState("tmp");
     const [password, setPassword] = useState("tmp")
 
@@ -49,7 +29,11 @@ const signInUser = (email: string, password: string) => {
       }
     })
     if (loggedIn) {
-      console.log("asdf")
+      if (signedUp) {
+        console.log('asdfasdf')
+        return (
+        <Signup></Signup>)
+      } else {
 
       return (
         <NavigationContainer>
@@ -142,7 +126,31 @@ const signInUser = (email: string, password: string) => {
         </Stack.Navigator>
       </NavigationContainer>
         )
-      } else {
+      } } else {
+        const signInUser = (email: string, password: string) => {
+          createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              console.log("asf")
+              setSignedUp(true)
+              // ----------- call create profile screen here ----------- //
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              if (errorCode === "auth/email-already-in-use") {
+                signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                  // Signed in 
+                  const user = userCredential.user;
+                })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                });
+              }
+            });
+        }
         return (
           <View style={signupStyles.container}>
             <Text style={signupStyles.logo}>Treender</Text>
@@ -161,7 +169,7 @@ const signInUser = (email: string, password: string) => {
                 placeholderTextColor="#003f5c"
                 onChangeText={text => setPassword(text)}/>
             </View>
-            <TouchableOpacity style={signupStyles.loginBtn} onPress={() => signInUser(email, password)}>
+            <TouchableOpacity style={signupStyles.loginBtn} onPress={() => signInUser(email, password, setSignedUp)}>
               <Text style={signupStyles.loginText}>LOGIN/SIGNUP</Text>
             </TouchableOpacity>
     
