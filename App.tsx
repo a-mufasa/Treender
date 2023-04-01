@@ -55,20 +55,6 @@ const App = () => (
             />
             
             <Tab.Screen
-              name="Matches"
-              component={Matches}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <TabBarIcon
-                    focused={focused}
-                    iconName="heart"
-                    text="Matches"
-                  />
-                ),
-              }}
-            />
-
-            <Tab.Screen
               name="Chat"
               component={Messages}
               options={{
