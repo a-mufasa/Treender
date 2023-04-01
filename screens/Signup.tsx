@@ -73,7 +73,6 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
 
         console.log(myMap);
         setUserInfo(myMap);
-
         let obj = {
             'fn': firstname,
             'ln': lastname,
