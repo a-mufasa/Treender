@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore"; 
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"; 
 import { db, auth } from "../firebaseConfig"
 import { DataT } from "../types";
 
@@ -43,6 +43,35 @@ export async function getUserInfo(): Promise<Map<string, string>> {
     } else {
         return new Map();
     }
+}
+
+export async function setUserTreeMessages(tree: string, messages: string[]) {
+    const treeRef = doc(db, "users", auth.currentUser?.uid!);
+    var docSnap = (await getDoc(treeRef))
+    if (docSnap.exists()) {
+        const userInfo = docSnap.data()
+        const returnMap = new Map();
+
+        returnMap.set('fName', userInfo['fName']);
+        returnMap.set('lName', userInfo['lName']);
+        returnMap.set('about', userInfo['about']);
+        returnMap.set('state', userInfo['state']);
+        returnMap.set('city', userInfo['city']);
+        returnMap.set('eyes', userInfo['eyes']);
+        returnMap.set('trees', userInfo['trees']);
+
+        await setDoc(doc(db, "users", auth.currentUser?.uid!), {
+            fName: returnMap.get('fName'),
+            lName: returnMap.get('lName'),
+            about: returnMap.get('about'),
+            state: returnMap.get('state'),
+            city: returnMap.get('city'),
+            eyes: returnMap.get('eyes'),
+            trees: {...returnMap.get('trees'), [tree]: messages}
+        })
+    }
+
+    console.log((await getDoc(treeRef)).data())
 }
 
 // ONLY FOR SETTING INITIAL DB TO ENSURE CONSISTENTCY
