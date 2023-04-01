@@ -11,18 +11,29 @@ import DEMO from "../assets/data/demo";
 import styles, { WHITE } from "../assets/styles";
 import { getUserInfo } from "../backend/UpdateDb";
 
+import ROHIT from "../assets/images/11.jpg";
+import AHMED from "../assets/images/12.jpg";
+import JUSTIN from "../assets/images/13.jpg";
+
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 const Profile = () => {
-  const {
-    age,
-    image,
-    info1,
-    info2,
-    info3,
-    info4,
-    location,
-    match,
-    name,
-  } = DEMO[7];
+  let randomNum = randomIntFromInterval(11, 13);
+  let image = ROHIT;
+
+  if (randomNum === 11){
+    image = AHMED;
+  }
+  else if(randomNum === 12){
+    image = JUSTIN;
+  } 
+  else{
+    image = ROHIT;
+  }
+
+
 
   const [userInfo, setUsrInfo] = useState({});
 
