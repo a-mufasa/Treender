@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Matches, Messages, Profile } from "./screens";
+import { Home, Matches, Messages, Profile, Signup } from "./screens";
 import { PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE } from "./assets/styles";
 import TabBarIcon from "./components/TabBarIcon";
 import Chat from "./screens/Chat";
@@ -49,6 +49,21 @@ const App = () => (
                     focused={focused}
                     iconName="search"
                     text="Explore"
+                  />
+                ),
+              }}
+            />
+
+            <Tab.Screen
+            // DO NOT PUSH TO MAIN!!!
+              name="Testing Page" 
+              component={Signup}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <TabBarIcon
+                    focused={focused}
+                    iconName="search"
+                    text="Testing"
                   />
                 ),
               }}
