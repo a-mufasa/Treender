@@ -53,22 +53,7 @@ const App = () => (
                 ),
               }}
             />
-
-            <Tab.Screen
-            // DO NOT PUSH TO MAIN!!!
-              name="Testing Page" 
-              component={Signup}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <TabBarIcon
-                    focused={focused}
-                    iconName="search"
-                    text="Testing"
-                  />
-                ),
-              }}
-            />
-
+            
             <Tab.Screen
               name="Matches"
               component={Matches}

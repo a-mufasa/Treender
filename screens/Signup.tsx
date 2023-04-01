@@ -37,10 +37,11 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
     const [description, setDescription] = useState("");
     const [eyeColor, setEyeColor] = useState("");
 
+    // TODO: Submit button handling! Do after firebase is set up
     const submitForm = () => {
 
     };
-
+    
     return (
         <SafeAreaView style={styles.safeAreaViewContainer}>
             <View style={styles.genericContainer}>  
@@ -64,7 +65,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
 
                 <TextInput
                     style={styles.baseInput}
-                    value={firstname}
+                    value={lastname}
                     placeholder={"Last Name"}
                     onChangeText={(text) => setLastName(text)}
                     autoCapitalize={"none"}
@@ -76,7 +77,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
 
                 <TextInput
                     style={styles.multilineInput}
-                    value={firstname}
+                    value={description}
                     onChangeText={(text) => setDescription(text)}
                     autoCapitalize={"none"}
                     multiline
@@ -88,6 +89,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                 <RNPickerSelect
                     style={pickerStyle}
                     placeholder={"Select an item  \&#9660;"}
+                    value={eyeColor}
                     onValueChange={(value) => setEyeColor(value)}
                     items={[
                         { label: 'Brown', value: 'Brown' },
