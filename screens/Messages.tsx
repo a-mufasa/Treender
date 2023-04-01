@@ -24,8 +24,8 @@ const Messages = () => {
     fetchTrees();
   }, []);
 
-  const handleChatPress = (messages: string[]) => {
-    navigation.navigate("Tree", {messages});
+  const handleChatPress = (name: string, messages: string[]) => {
+    navigation.navigate("Tree", {name, messages});
   };
 
   return (
@@ -45,7 +45,7 @@ const Messages = () => {
           data={Object.keys(trees)}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleChatPress(trees[item])}>
+            <TouchableOpacity onPress={() => handleChatPress(item, trees[item])}>
               <Message
                 image='assets/images/01.jpg'
                 name={item}
