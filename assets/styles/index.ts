@@ -340,7 +340,7 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   navbar: {
-    backgroundColor: '#0095f6',
+    backgroundColor: PRIMARY_COLOR,
     height: 84,
     paddingTop: 30,
     justifyContent: 'center',
@@ -363,7 +363,7 @@ export default StyleSheet.create({
   },
   userBubble: {
     alignSelf: 'flex-end',
-    backgroundColor: '#b5e5ff',
+    backgroundColor: '#CBC3E3',
   },
   botBubble: {
     alignSelf: 'flex-start',
@@ -407,7 +407,7 @@ export default StyleSheet.create({
     color: '#333',
   },
   sendButton: {
-    backgroundColor: '#0095f6',
+    backgroundColor: PRIMARY_COLOR,
     borderRadius: 24,
     paddingVertical: 12,
     paddingHorizontal: 16,
