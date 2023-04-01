@@ -8,7 +8,7 @@ import TabBarIcon from "./components/TabBarIcon";
 import "react-native-url-polyfill/auto"
 import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseConfig";
-import { TextInput, TouchableOpacity, View, Image, Text } from "react-native";
+import { TextInput, TouchableOpacity, View, Image, Text, LogBox } from "react-native";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,6 +20,9 @@ const Tab = createBottomTabNavigator();
     const [signedUp, setSignedUp] = useState(false);
     const [email, setEmail] = useState("tmp");
     const [password, setPassword] = useState("tmp")
+    LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+    LogBox.ignoreAllLogs();
+    LogBox.ignoreLogs(['Error: ...']);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -77,6 +80,7 @@ const Tab = createBottomTabNavigator();
                       />
                     ),
                     
+                    
                   }}
                 />
 
@@ -100,7 +104,7 @@ const Tab = createBottomTabNavigator();
                   name="Explore"
                   component={Signup}
                   options={{
-                    
+                    tabBarButton: () => null,
                     tabBarIcon: ({ focused }) => (
                       <TabBarIcon
                         focused={focused}
@@ -196,6 +200,7 @@ const Tab = createBottomTabNavigator();
                   name="Create User"
                   component={Signup}
                   options={{
+                    tabBarButton: () => null,
                     tabBarIcon: ({ focused }) => (
                       <TabBarIcon
                         focused={focused}
@@ -203,6 +208,7 @@ const Tab = createBottomTabNavigator();
                         text="Create User"
                       />
                     ),
+                    tabBarLabel: null,
                   }}
                 />
     
