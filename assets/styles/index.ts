@@ -299,4 +299,45 @@ export default StyleSheet.create({
   iconMenu: {
     alignItems: "center",
   },
+
+  // CONTAINER - CHAT
+  containerChat: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: '#F0F8FF',
+  },
+  chatWindow: {
+    padding: 10,
+    margin: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    minHeight: 50,
+    alignSelf: 'flex-start',
+    maxWidth: '80%',
+  },
+  chatText: {
+    fontSize: 16,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+  textInput: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 10,
+    padding: 10,
+    marginRight: 10,
+  },
+  sendButton: {
+    backgroundColor: '#4682B4',
+    borderRadius: 10,
+    padding: 10,
+  },
+  sendButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
