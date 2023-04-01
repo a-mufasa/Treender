@@ -49,6 +49,8 @@ const signInUser = (email: string, password: string) => {
       }
     })
     if (loggedIn) {
+      console.log("asdf")
+
       return (
         <NavigationContainer>
         <Stack.Navigator>
