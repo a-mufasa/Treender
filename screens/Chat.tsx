@@ -81,8 +81,9 @@ const Chat = () => {
           <Text style={styles.navbarText}>Chat with AI</Text>
         </View>
         <View style={styles.chatContainer}>
-          <ScrollView
+          <ScrollView 
             ref={scrollViewRef}
+            style={{flex: 1}}
             contentContainerStyle={styles.contentContainer}
             onContentSizeChange={() =>
               scrollViewRef.current?.scrollToEnd({ animated: true })

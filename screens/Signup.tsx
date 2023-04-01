@@ -9,6 +9,7 @@ TextInput,
 Pressable 
 } from "react-native"; 
 import RNPickerSelect , { PickerStyle } from 'react-native-picker-select';
+import GetLocation from 'react-native-get-location'
 
 const EyeColors = ['Brown', "Amber", "Hazel","Green","Blue","Gray",];
 const pickerStyle: PickerStyle = {
@@ -36,6 +37,20 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
     const [lastname, setLastName] = useState("");
     const [description, setDescription] = useState("");
     const [eyeColor, setEyeColor] = useState("");
+
+    const getUserLocation = () =>{
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 60000,
+        })
+        .then(location => {
+            console.log(location);
+        })
+        .catch(error => {
+            const { code, message } = error;
+            console.warn(code, message);
+        })
+    }
 
     // TODO: Submit button handling! Do after firebase is set up
     const submitForm = () => {
@@ -100,6 +115,8 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                         { label: 'Gray', value: 'Gray' },
                     ]}
                 />
+
+                <Pressable onPress={getUserLocation}><Text>Set your location!</Text></Pressable>
 
                 <Pressable 
                     onPress={submitForm}

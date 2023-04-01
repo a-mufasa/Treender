@@ -81,6 +81,19 @@ const App = () => (
                 ),
               }}
             />
+            <Tab.Screen
+              name="Create User"
+              component={Signup}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <TabBarIcon
+                    focused={focused}
+                    iconName="chatbubble"
+                    text="Create User"
+                  />
+                ),
+              }}
+            />
 
             <Tab.Screen
               name="Profile"
