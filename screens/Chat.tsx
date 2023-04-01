@@ -27,18 +27,20 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const runCompletion = async (input: string): Promise<string> => {
+  const runCompletion = async (input: string, conversation: { role: string; content: string }[]): Promise<string> => {
     try {
+      const history = conversation
+        .map((message) => `${message.role === 'user' ? 'Q:' : 'A:'} ${message.content}`)
+        .join('\n\n');
+      const prompt = `You are a willow tree. The user will send you messages, and you will provide a response that is SHORT, flirty, conversational, and environment/tree related.\n\n${history}\nQ: ${input} `;
       const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
-        messages: [
-          {
-            role: 'user',
-            content: input,
-          },
-        ],
+        messages: [{
+          role: 'user',
+          content: prompt
+        }]
       });
-      return completion.data.choices[0].message!.content;
+      return completion.data.choices[0].message?.content!;
     } catch (e) {
       console.log(e);
       return "Something is going wrong, Please try again.";
@@ -55,10 +57,10 @@ const Chat = () => {
     setInput('');
     setConversation((prevConversation) => [...prevConversation, newMessage]);
     try {
-      const response = await runCompletion(input);
+      const response = await runCompletion(input, conversation);
       const newMessageResponse = {
         role: 'bot',
-        content: response,
+        content: response.replace(/^A: /, ''),
       };
       setConversation((prevConversation) => [
         ...prevConversation,
