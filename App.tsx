@@ -106,29 +106,15 @@ const signInUser = (email: string, password: string) => {
                   }}
                 />
 
-            <Tab.Screen
-              name="Create User"
-              component={Signup}
-              options={{
-                tabBarIcon: ({ focused }) => (
-                  <TabBarIcon
-                    focused={focused}
-                    iconName="chatbubble"
-                    text="Create User"
-                  />
-                ),
-              }}
-            />
-    
                 <Tab.Screen
-                  name="GPT"
-                  component={Chat}
+                  name="Create User"
+                  component={Signup}
                   options={{
                     tabBarIcon: ({ focused }) => (
                       <TabBarIcon
                         focused={focused}
                         iconName="chatbubble"
-                        text="GPT"
+                        text="Create User"
                       />
                     ),
                   }}
@@ -150,6 +136,7 @@ const signInUser = (email: string, password: string) => {
               </Tab.Navigator>
             )}
           </Stack.Screen>
+          <Stack.Screen name="Tree" component={Chat}/>
         </Stack.Navigator>
       </NavigationContainer>
         )

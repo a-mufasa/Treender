@@ -21,18 +21,24 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const Chat = () => {
+interface Message {
+  role: string;
+  content: string;
+}
+
+const Chat = (messages: string[]) => {
+  const oldMessages = messages['route']['params']['messages'];
   const [input, setInput] = useState('');
-  const [conversation, setConversation] = useState<{role: string, content: string}[]>([]);
+  const [conversation, setConversation] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const runCompletion = async (input: string, conversation: { role: string; content: string }[]): Promise<string> => {
+  const runCompletion = async (input: string, conversation: Message[]): Promise<string> => {
     try {
       const history = conversation
         .map((message) => `${message.role === 'user' ? 'Q:' : 'A:'} ${message.content}`)
         .join('\n\n');
-      const prompt = `You are a willow tree. The user will send you messages, and you will provide a response that is SHORT, flirty, conversational, and environment/tree related.\n\n${history}\nQ: ${input} `;
+      const prompt = `You are a willow tree. The user will send you messages, and you will provide a SINGLE response that is SHORT, flirty, conversational, and environment/tree related.\n\n${history}\nQ: ${input} `;
       const completion = await openai.createChatCompletion({
         model: 'gpt-3.5-turbo',
         messages: [{
@@ -40,7 +46,7 @@ const Chat = () => {
           content: prompt
         }]
       });
-      return completion.data.choices[0].message?.content!;
+      return completion.data.choices[0].message?.content!.replace(/A: /g, '')!;
     } catch (e) {
       console.log(e);
       return "Something is going wrong, Please try again.";
@@ -60,7 +66,7 @@ const Chat = () => {
       const response = await runCompletion(input, conversation);
       const newMessageResponse = {
         role: 'bot',
-        content: response.replace(/^A: /, ''),
+        content: response,
       };
       setConversation((prevConversation) => [
         ...prevConversation,
@@ -73,6 +79,15 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    // convert the array of messages to a conversation object with alternating user and bot messages
+    const conversationFromProps = oldMessages.reduce((conversation: Message[], message: string, i: number) => {
+      const role = i % 2 === 0 ? 'user' : 'bot';
+      return [...conversation, { role, content: message }];
+    }, []);
+    setConversation(conversationFromProps);
+  }, [oldMessages]);
+
+  useEffect(() => {
     scrollViewRef.current?.scrollToEnd({ animated: false });
   }, [conversation]);
 
@@ -81,9 +96,6 @@ const Chat = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <View style={styles.statusBar} />
-          <View style={styles.navbar}>
-            <Text style={styles.navbarText}>Tree</Text>
-          </View>
           <View style={styles.chatContainer}>
             <ScrollView
               ref={scrollViewRef}

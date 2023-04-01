@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   Text,
@@ -8,37 +8,55 @@ import {
   FlatList,
 } from "react-native";
 import { Icon, Message } from "../components";
-import DEMO from "../assets/data/demo";
 import styles, { DARK_GRAY } from "../assets/styles";
+import { useNavigation } from "@react-navigation/native";
+import { getUserInfo } from "../backend/UpdateDb";
 
-const Messages = () => (
-  <ImageBackground
-    source={require("../assets/images/bg.png")}
-    style={styles.bg}
-  >
-    <View style={styles.containerMessages}>
-      <View style={styles.top}>
-        <Text style={styles.title}>Messages</Text>
-        <TouchableOpacity>
-          <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
-        </TouchableOpacity>
-      </View>
+const Messages = () => {
+  const navigation = useNavigation();
+  const [trees, setTrees] = useState<string>('');
 
-      <FlatList
-        data={DEMO}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
+  useEffect(() => {
+    const fetchTrees = async () => {
+      const userInfo = await getUserInfo();
+      setTrees(userInfo.get("trees")!);
+    };
+    fetchTrees();
+  }, []);
+
+  const handleChatPress = (messages: string[]) => {
+    navigation.navigate("Tree", {messages});
+  };
+
+  return (
+    <ImageBackground
+      source={require("../assets/images/bg.png")}
+      style={styles.bg}
+    >
+      <View style={styles.containerMessages}>
+        <View style={styles.top}>
+          <Text style={styles.title}>Messages</Text>
           <TouchableOpacity>
-            <Message
-              image={item.image}
-              name={item.name}
-              lastMessage={item.message}
-            />
+            <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
           </TouchableOpacity>
-        )}
-      />
-    </View>
-  </ImageBackground>
-);
+        </View>
+
+        <FlatList
+          data={Object.keys(trees)}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => handleChatPress(trees[item])}>
+              <Message
+                image='assets/images/01.jpg'
+                name={item}
+                lastMessage={trees[item][trees[item].length - 1] || ''}
+              />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </ImageBackground>
+  );
+};
 
 export default Messages;
