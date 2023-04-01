@@ -16,7 +16,6 @@ export type IconT = {
 };
 
 export type MessageT = {
-  image: any;
   lastMessage: string;
   name: string;
 };
