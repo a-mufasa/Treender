@@ -171,19 +171,19 @@ const signInUser = (email: string, password: string) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#003f5c',
+    backgroundColor: WHITE,
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo:{
     fontWeight:"bold",
     fontSize:50,
-    color:"#fb5b5a",
+    color:PRIMARY_COLOR,
     marginBottom:40
   },
   inputView:{
     width:"80%",
-    backgroundColor:"#465881",
+    backgroundColor:"#CBC3E3",
     borderRadius:25,
     height:50,
     marginBottom:20,
@@ -194,13 +194,9 @@ const styles = StyleSheet.create({
     height:50,
     color:"white"
   },
-  forgot:{
-    color:"white",
-    fontSize:11
-  },
   loginBtn:{
     width:"80%",
-    backgroundColor:"#fb5b5a",
+    backgroundColor:PRIMARY_COLOR,
     borderRadius:25,
     height:50,
     alignItems:"center",
