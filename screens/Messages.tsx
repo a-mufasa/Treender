@@ -9,11 +9,12 @@ import {
 } from "react-native";
 import { Icon, Message } from "../components";
 import styles, { DARK_GRAY } from "../assets/styles";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { getUserInfo } from "../backend/UpdateDb";
 
 const Messages = () => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const [trees, setTrees] = useState<string>('');
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Messages = () => {
       setTrees(userInfo.get("trees")!);
     };
     fetchTrees();
-  }, []);
+  }, [isFocused]);
 
   const handleChatPress = (name: string, messages: string[]) => {
     navigation.navigate("Tree", {name, messages});

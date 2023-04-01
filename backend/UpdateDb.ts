@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"; 
+import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore"; 
 import { db, auth } from "../firebaseConfig"
 import { DataT } from "../types";
 
@@ -116,5 +116,5 @@ export async function getTreeByState(state: string): Promise<DataT[]> {
         }
         trees.push(entry)
       });
-      return trees
+    return trees
 }
