@@ -25,6 +25,11 @@ export const signupStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoImage: {
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+  },
   logo:{
     fontWeight:"bold",
     fontSize:50,

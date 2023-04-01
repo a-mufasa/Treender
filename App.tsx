@@ -8,7 +8,7 @@ import TabBarIcon from "./components/TabBarIcon";
 import "react-native-url-polyfill/auto"
 import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseConfig";
-import { TextInput, TouchableOpacity, View, StyleSheet, Text } from "react-native";
+import { TextInput, TouchableOpacity, View, Image, Text } from "react-native";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -153,6 +153,7 @@ const Tab = createBottomTabNavigator();
         }
         return (
           <View style={signupStyles.container}>
+            <Image source={require('./assets/images/logo.png')} style={signupStyles.logoImage} />
             <Text style={signupStyles.logo}>Treender</Text>
             <View style={signupStyles.inputView} >
               <TextInput  
