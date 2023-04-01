@@ -9,6 +9,7 @@ import IMAGE_07 from "../images/07.jpg";
 import IMAGE_08 from "../images/08.jpg";
 import IMAGE_09 from "../images/09.jpg";
 import IMAGE_10 from "../images/10.jpg";
+import IMAGE_11 from "../images/11.jpg";
 
 const data: DataT[] = [
   {
@@ -100,7 +101,7 @@ const data: DataT[] = [
     isOnline: true,
     message:
       "And as for the television's so-called plan, Batman has no jurisdiction.",
-    image: IMAGE_08,
+    image: IMAGE_11,
   },
   {
     id: 9,
