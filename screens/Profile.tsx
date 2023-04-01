@@ -15,25 +15,9 @@ import ROHIT from "../assets/images/11.jpg";
 import AHMED from "../assets/images/12.jpg";
 import JUSTIN from "../assets/images/13.jpg";
 
-function randomIntFromInterval(min, max) { // min and max included 
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
 
 const Profile = () => {
-  let randomNum = randomIntFromInterval(11, 13);
   let image = ROHIT;
-
-  if (randomNum === 11){
-    image = AHMED;
-  }
-  else if(randomNum === 12){
-    image = JUSTIN;
-  } 
-  else{
-    image = ROHIT;
-  }
-
-
 
   const [userInfo, setUsrInfo] = useState({});
 
@@ -96,11 +80,6 @@ const Profile = () => {
         <View style={styles.actionsProfile}>
           <TouchableOpacity style={styles.circledButton}>
             <Icon name="ellipsis-horizontal" size={20} color={WHITE} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.roundedButton}>
-            <Icon name="chatbubble" size={20} color={WHITE} />
-            <Text style={styles.textButton}>Start chatting</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

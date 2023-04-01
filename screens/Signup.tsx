@@ -243,16 +243,15 @@ const styles = StyleSheet.create({
     },
 
     formSubmitButton: {
-        width: '80%',
-        height: '10%',
-        margin: '10%',
-        marginBottom: '20%',
-        backgroundColor:'#4bd154',
-        borderRadius: 100,
-        borderWidth: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
+        width:"80%",
+        backgroundColor:"#7444C0",
+        borderRadius:25,
+        height:50,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:20,
+        marginBottom:10,
+        marginLeft: '10%',
     },
 
     pickerSelectStyling: {
