@@ -339,18 +339,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  navbar: {
-    backgroundColor: PRIMARY_COLOR,
-    height: 84,
-    paddingTop: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  navbarText: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   chatContainer: {
     flex: 1,
     marginBottom: 8,
@@ -388,7 +376,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: 16,
-    paddingVertical: 8,
+    paddingTop: 8,
+    paddingBottom: 32,
   },
   contentContainer: {
     flexGrow: 1,
