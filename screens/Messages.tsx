@@ -47,7 +47,6 @@ const Messages = () => {
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => handleChatPress(item, trees[item])}>
               <Message
-                image='assets/images/01.jpg'
                 name={item}
                 lastMessage={trees[item][trees[item].length - 1] || ''}
               />

@@ -1,5 +1,5 @@
 import { DataT } from "../../types";
-import IMAGE_LOBLOLLY_PINE from "../images/Loblolly-Pine-Trees.jpg";
+import IMAGE_LOBLOLLY_PINE from "../images/Loblolly-Pine.jpg";
 import IMAGE_PERSIMMON from "../images/Persimmon.jpg"
 import IMAGE_HONEY_LOCUST from "../images/Honey-Locust.jpg"
 import IMAGE_EASTERN_RED_CEDAR from "../images/Eastern-Red-Cedar.jpg"
