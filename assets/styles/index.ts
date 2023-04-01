@@ -18,6 +18,47 @@ export const FLASH_ACTIONS = "#5028D7";
 export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
+export const signupStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: WHITE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo:{
+    fontWeight:"bold",
+    fontSize:50,
+    color:PRIMARY_COLOR,
+    marginBottom:40
+  },
+  inputView:{
+    width:"80%",
+    backgroundColor:"#CBC3E3",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20
+  },
+  inputText:{
+    height:50,
+    color:"white"
+  },
+  loginBtn:{
+    width:"80%",
+    backgroundColor:PRIMARY_COLOR,
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10
+  },
+  loginText:{
+    color:"white"
+  }
+});
+
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
   containerCardItem: {
