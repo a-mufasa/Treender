@@ -301,43 +301,87 @@ export default StyleSheet.create({
   },
 
   // CONTAINER - CHAT
-  containerChat: {
+  container: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: '#F0F8FF',
+    backgroundColor: '#fff',
   },
-  chatWindow: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    minHeight: 50,
-    alignSelf: 'flex-start',
+  navbar: {
+    backgroundColor: '#0095f6',
+    height: 84,
+    paddingTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navbarText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  chatContainer: {
+    flex: 1,
+    marginBottom: 8,
+  },
+  chatBubble: {
     maxWidth: '80%',
+    borderRadius: 20,
+    padding: 10,
+    marginVertical: 10,
+  },
+  userBubble: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#b5e5ff',
+  },
+  botBubble: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  lastMessage: {
+    marginBottom: 16,
   },
   chatText: {
     fontSize: 16,
+    lineHeight: 22,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    marginHorizontal: 16,
+  },
+  contentContainer: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
   },
   textInput: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 10,
-    marginRight: 10,
+    backgroundColor: '#F3F3F3',
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    marginRight: 8,
+    color: '#333',
   },
   sendButton: {
-    backgroundColor: '#4682B4',
-    borderRadius: 10,
-    padding: 10,
+    backgroundColor: '#0095f6',
+    borderRadius: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
   sendButtonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    color: '#fff',
     fontSize: 16,
+    fontWeight: 'bold',
   },
+  statusBar: {
+    backgroundColor: '#0095f6',
+  }
 });
