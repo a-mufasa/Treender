@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home, Matches, Messages, Profile } from "./screens";
 import { PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE } from "./assets/styles";
 import TabBarIcon from "./components/TabBarIcon";
+import Chat from "./screens/Chat";
+import "react-native-url-polyfill/auto"
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,6 +77,20 @@ const App = () => (
                     focused={focused}
                     iconName="chatbubble"
                     text="Chat"
+                  />
+                ),
+              }}
+            />
+
+            <Tab.Screen
+              name="GPT"
+              component={Chat}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <TabBarIcon
+                    focused={focused}
+                    iconName="chatbubble"
+                    text="GPT"
                   />
                 ),
               }}
