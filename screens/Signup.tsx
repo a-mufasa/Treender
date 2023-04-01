@@ -6,10 +6,13 @@ SafeAreaView,
 ImageBackground, 
 StyleSheet, 
 TextInput, 
-Pressable 
+Pressable,
+KeyboardAvoidingView,
 } from "react-native"; 
 import RNPickerSelect , { PickerStyle } from 'react-native-picker-select';
 import GetLocation from 'react-native-get-location'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const EyeColors = ['Brown', "Amber", "Hazel","Green","Blue","Gray",];
 const pickerStyle: PickerStyle = {
@@ -37,6 +40,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
     const [lastname, setLastName] = useState("");
     const [description, setDescription] = useState("");
     const [eyeColor, setEyeColor] = useState("");
+    const [location, setLocation] = useState({});
 
     const getUserLocation = () =>{
         GetLocation.getCurrentPosition({
@@ -54,6 +58,25 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
 
     // TODO: Submit button handling! Do after firebase is set up
     const submitForm = () => {
+        city = location["terms"][0]["value"];
+        state = location["terms"][1]["value"];
+        let myMap = new Map<string, string>([
+            ["fName", firstname],
+            ["lName", lastname],
+            ["about", description],
+            ["state", state],
+            ["city", city],
+            ["eyes", eyeColor],
+            ["trees", []]
+        ]);
+
+        console.log(myMap);
+
+        let obj = {
+            'fn': firstname,
+            'ln': lastname,
+            'description': description,
+        }
 
     };
     
@@ -62,10 +85,13 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
             <View style={styles.genericContainer}>  
                 <Text style={styles.textHeading1}>Welcome, Create Your Account</Text>
             </View>
-            <ScrollView  keyboardShouldPersistTaps='never' contentContainerStyle={styles.scrollViewStyling}>
+            
+            
+            <KeyboardAwareScrollView  keyboardShouldPersistTaps='always' contentContainerStyle={styles.scrollViewStyling}>
                 <View style={styles.formLabelContainers}>
                     <Text style={styles.formPromptStyling}>First Name</Text>
                 </View>
+                
                 <TextInput
                     style={styles.baseInput}
                     value={firstname}
@@ -73,7 +99,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                     onChangeText={(text) => setFirstName(text)}
                     autoCapitalize={"none"}
                 />
-
+                
                 <View style={styles.formLabelContainers}>
                     <Text style={styles.formPromptStyling}>Last Name</Text>
                 </View>
@@ -97,6 +123,50 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                     autoCapitalize={"none"}
                     multiline
                 />
+
+                <View style={styles.formLabelContainers}>
+                    <Text style={styles.formPromptStyling}>Enter your location</Text>
+                </View>
+
+                <GooglePlacesAutocomplete
+                        placeholder='Search'
+                        
+                        styles= {{
+                            textInputContainer: {
+                            },
+                            listView: {
+                                zIndex: 1000,
+                            },
+                            textInput: {
+                              height: 40,
+                              maxWidth: '80%',
+                              marginLeft: '10%',
+                              marginBottom: 20,
+                              color: '#5d5d5d',
+                              fontSize: 16,
+                            },
+                            predefinedPlacesDescription: {
+                              color: '#1faadb',
+                            },
+                          }}
+                        onPress={(data, details = null) => {
+                            try {
+                                // 'details' is provided when fetchDetails = true
+                                console.log(data, details);
+                                setLocation(data);
+                            } catch (error) {
+                                console.log(data, details);
+                                setLocation(data);
+                            }
+                            
+                        }}
+                        query={{
+                            key: 'AIzaSyCJAbK3Tsh-kdHoC_DKvrxkk2vxFWqV6I0',
+                            language: 'en',
+                            types: ['(cities)', '(regions)'],
+                        }}
+                    />
+
                 <View style={styles.formLabelContainers}>
                     <Text style={styles.formPromptStyling}>What color are your eyes?</Text>
                 </View>
@@ -116,15 +186,16 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
                     ]}
                 />
 
-                <Pressable onPress={getUserLocation}><Text>Set your location!</Text></Pressable>
-
                 <Pressable 
                     onPress={submitForm}
                     style={styles.formSubmitButton}
                 >
                     <Text>Submit</Text>
                 </Pressable>
-            </ScrollView>
+            </KeyboardAwareScrollView>
+
+
+
         </SafeAreaView>
     )
 };
@@ -155,24 +226,26 @@ const styles = StyleSheet.create({
     },
     
     formPromptStyling: {
-        fontSize: 20
+        fontSize: 20,
+        marginLeft: '-10%',
     },
 
     scrollViewStyling: {
-        flex: 1,
-        alignItems: 'center',
+        flexGrow: 1,
         paddingTop: '5%',
         width: '100%',
     },
     baseInput: {
       height: 40,
       width: '80%',
+      marginLeft: '10%',
       marginBottom: 20,
       backgroundColor: '#fff',
     },
 
     multilineInput: {
         height: 120,
+        marginLeft: '10%',
         width: '80%',
         marginBottom: 20,
         backgroundColor: '#fff',
@@ -181,7 +254,8 @@ const styles = StyleSheet.create({
     formSubmitButton: {
         width: '80%',
         height: '10%',
-        margin: '20%',
+        margin: '10%',
+        marginBottom: '20%',
         backgroundColor:'#4bd154',
         borderRadius: 100,
         borderWidth: 1,
@@ -196,6 +270,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#333',
     },
+
+    googleNavBarStyle: {
+        height: 40,
+        width: '40',
+        minWidth: '50%',
+        marginBottom: 10,
+        backgroundColor: '#fff',
+    }
 
   });
 
