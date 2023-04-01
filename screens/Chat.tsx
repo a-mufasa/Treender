@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_ORG_ID, OPENAI_API_KEY } from "@env";
@@ -74,54 +75,55 @@ const Chat = () => {
   }, [conversation]);
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <View style={styles.statusBar} />
-        <View style={styles.navbar}>
-          <Text style={styles.navbarText}>Chat with AI</Text>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
+          <View style={styles.statusBar} />
+          <View style={styles.navbar}>
+            <Text style={styles.navbarText}>Tree</Text>
+          </View>
+          <View style={styles.chatContainer}>
+            <ScrollView
+              ref={scrollViewRef}
+              contentContainerStyle={styles.contentContainer}
+              onContentSizeChange={() =>
+                scrollViewRef.current?.scrollToEnd({ animated: true })
+              }>
+              {conversation.map((message, i) => {
+                const { role, content } = message;
+                return (
+                  <View
+                    key={`${role}_${i}`}
+                    style={[
+                      styles.chatBubble,
+                      role === 'user' ? styles.userBubble : styles.botBubble,
+                      i === conversation.length - 1 && styles.lastMessage,
+                    ]}>
+                    <Text style={styles.chatText}>{content}</Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textInput}
+              placeholderTextColor="#666"
+              placeholder="Type your message here..."
+              onChangeText={(text) => setInput(text)}
+              value={input}
+            />
+            <TouchableOpacity style={styles.sendButton} onPress={handleSubmit}>
+              {isLoading ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                <Text style={styles.sendButtonText}>Send</Text>
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.chatContainer}>
-          <ScrollView 
-            ref={scrollViewRef}
-            style={{flex: 1}}
-            contentContainerStyle={styles.contentContainer}
-            onContentSizeChange={() =>
-              scrollViewRef.current?.scrollToEnd({ animated: true })
-            }>
-            {conversation.map((message, i) => {
-              const { role, content } = message;
-              return (
-                <View
-                  key={`${role}_${i}`}
-                  style={[
-                    styles.chatBubble,
-                    role === 'user' ? styles.userBubble : styles.botBubble,
-                    i === conversation.length - 1 && styles.lastMessage,
-                  ]}>
-                  <Text style={styles.chatText}>{content}</Text>
-                </View>
-              );
-            })}
-          </ScrollView>
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            placeholderTextColor="#666"
-            placeholder="Type your message here..."
-            onChangeText={(text) => setInput(text)}
-            value={input}
-          />
-          <TouchableOpacity style={styles.sendButton} onPress={handleSubmit}>
-            {isLoading ? (
-              <ActivityIndicator size="small" color="#ffffff" />
-            ) : (
-              <Text style={styles.sendButtonText}>Send</Text>
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );  
 };
 
