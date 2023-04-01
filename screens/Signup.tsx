@@ -15,6 +15,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { setUserInfo } from "../backend/UpdateDb";
 import { GOOGLE_PLACES_API_KEY } from "@env";
+import { Home, Messages, Profile, Chat } from "./screens";
 import { useNavigation } from "@react-navigation/native";
 
 const EyeColors = ['Brown', "Amber", "Hazel","Green","Blue","Gray",];
@@ -67,7 +68,7 @@ const SignupForm:FC<{}> = ({}): ReactElement => {
             'ln': lastname,
             'description': description,
         }
-        navigation.navigate("Tab", {screen: 'Explore'});
+        navigation.navigate("Tab", {screen: 'Create User'});
     };
     
     return (
