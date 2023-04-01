@@ -4,6 +4,11 @@ import Icon from "./Icon";
 import { ProfileItemT } from "../types";
 import styles, { DARK_GRAY, WHITE } from "../assets/styles";
 
+import ROHIT from "../assets/images/11.jpg";
+import AHMED from "../assets/images/12.jpg";
+import JUSTIN from "../assets/images/13.jpg";
+
+
 const ProfileItem = ({
   age,
   info1,
