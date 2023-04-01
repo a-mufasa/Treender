@@ -299,4 +299,89 @@ export default StyleSheet.create({
   iconMenu: {
     alignItems: "center",
   },
+
+  // CONTAINER - CHAT
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  navbar: {
+    backgroundColor: '#0095f6',
+    height: 84,
+    paddingTop: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  navbarText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  chatContainer: {
+    flex: 1,
+    marginBottom: 8,
+  },
+  chatBubble: {
+    maxWidth: '80%',
+    borderRadius: 20,
+    padding: 10,
+    marginVertical: 10,
+  },
+  userBubble: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#b5e5ff',
+  },
+  botBubble: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#ffffff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  lastMessage: {
+    marginBottom: 16,
+  },
+  chatText: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 16,
+  },
+  contentContainer: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 8,
+  },
+  textInput: {
+    flex: 1,
+    backgroundColor: '#F3F3F3',
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+    marginRight: 8,
+    color: '#333',
+  },
+  sendButton: {
+    backgroundColor: '#0095f6',
+    borderRadius: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  sendButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  statusBar: {
+    backgroundColor: '#0095f6',
+  }
 });
