@@ -232,7 +232,7 @@ export default StyleSheet.create({
     paddingTop: 25,
     paddingBottom: 5,
     color: DARK_GRAY,
-    fontSize: 15,
+    fontSize: 40,
     textAlign: "center",
   },
   descriptionProfileItem: {
