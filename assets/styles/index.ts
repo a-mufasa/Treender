@@ -346,7 +346,6 @@ export default StyleSheet.create({
   },
   chatContainer: {
     flex: 1,
-    marginBottom: 8,
   },
   chatBubble: {
     maxWidth: '80%',
@@ -375,7 +374,7 @@ export default StyleSheet.create({
   },
   chatText: {
     fontSize: 16,
-    lineHeight: 22,
+    lineHeight: 22
   },
   inputContainer: {
     flexDirection: 'row',

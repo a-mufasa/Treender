@@ -8,7 +8,7 @@ import TabBarIcon from "./components/TabBarIcon";
 import "react-native-url-polyfill/auto"
 import { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebaseConfig";
-import { TextInput, TouchableOpacity, View, Image, Text, LogBox } from "react-native";
+import { TextInput, TouchableOpacity, View, Image, Text, Keyboard, LogBox, TouchableWithoutFeedback } from "react-native";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -228,7 +228,7 @@ const Tab = createBottomTabNavigator();
               </Tab.Navigator>
             )}
           </Stack.Screen>
-          <Stack.Screen name="Tree" component={Chat}/>
+          <Stack.Screen name="Tree" options={({route}) => ({title: route.params.name})}  component={Chat}/>
         </Stack.Navigator>
       </NavigationContainer>
         )
@@ -258,6 +258,7 @@ const Tab = createBottomTabNavigator();
             });
         }
         return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={signupStyles.container}>
             <Image source={require('./assets/images/logo.png')} style={signupStyles.logoImage} />
             <Text style={signupStyles.logo}>Treender</Text>
@@ -279,9 +280,8 @@ const Tab = createBottomTabNavigator();
             <TouchableOpacity style={signupStyles.loginBtn} onPress={() => signInUser(email, password, setSignedUp)}>
               <Text style={signupStyles.loginText}>LOGIN/SIGNUP</Text>
             </TouchableOpacity>
-    
-      
           </View>
+          </TouchableWithoutFeedback>
         );
     }
 };
