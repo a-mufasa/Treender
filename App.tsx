@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Messages, Profile, Chat } from "./screens";
+import { Home, Messages, Profile, Chat, Signup } from "./screens";
 import { PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE, signupStyles } from "./assets/styles";
 import TabBarIcon from "./components/TabBarIcon";
 import "react-native-url-polyfill/auto"
@@ -105,6 +105,20 @@ const signInUser = (email: string, password: string) => {
                     ),
                   }}
                 />
+
+            <Tab.Screen
+              name="Create User"
+              component={Signup}
+              options={{
+                tabBarIcon: ({ focused }) => (
+                  <TabBarIcon
+                    focused={focused}
+                    iconName="chatbubble"
+                    text="Create User"
+                  />
+                ),
+              }}
+            />
     
                 <Tab.Screen
                   name="GPT"
