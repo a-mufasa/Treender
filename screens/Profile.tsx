@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect}  from "react";
 import {
   ScrollView,
   View,
@@ -9,6 +9,7 @@ import {
 import { Icon, ProfileItem } from "../components";
 import DEMO from "../assets/data/demo";
 import styles, { WHITE } from "../assets/styles";
+import { getUserInfo } from "../backend/UpdateDb";
 
 const Profile = () => {
   const {
@@ -23,7 +24,26 @@ const Profile = () => {
     name,
   } = DEMO[7];
 
+  const [userInfo, setUsrInfo] = useState({});
+
+    useEffect(() => {
+      const getDatabaseInfo = ()  => {
+        getUserInfo()
+          .then((databaseInfo) => {
+            console.log(databaseInfo); // Check the value of databaseInfo
+            setUsrInfo(databaseInfo);
+          })
+          .catch((error) => {
+            console.log('Error!', error);
+          });
+      }
+      
+      getDatabaseInfo();
+
+    }, []);
+  console.log(userInfo);
   return (
+    
     <ImageBackground
       source={require("../assets/images/bg.png")}
       style={styles.bg}
@@ -51,16 +71,16 @@ const Profile = () => {
           </View>
         </ImageBackground>
 
-        <ProfileItem
-          matches={match}
-          name={name}
-          age={age}
-          location={location}
-          info1={info1}
-          info2={info2}
-          info3={info3}
-          info4={info4}
-        />
+        {userInfo.size > 0 && (
+          <ProfileItem
+          matches=""
+            name={userInfo?.get('fName') + ' ' + userInfo?.get('lName')}
+            age={''}
+            location={userInfo?.get('city') + ',' + userInfo?.get('state')}
+            info1={userInfo?.get('eyes')}
+            info2={userInfo?.get('about')}
+          />
+        )}
 
         <View style={styles.actionsProfile}>
           <TouchableOpacity style={styles.circledButton}>
