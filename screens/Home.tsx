@@ -4,13 +4,31 @@ import CardStack, { Card } from "react-native-card-stack-swiper";
 import { City, Filters, CardItem } from "../components";
 import styles from "../assets/styles";
 import DEMO from "../assets/data/demo";
+import { getUserInfo, setUserInfo } from "../backend/UpdateDb";
+import { TransitionPresets } from "@react-navigation/stack";
 
 const Home = () => {
   const [swiper, setSwiper] = useState<CardStack | null>(null);
   const [swipedCards, setSwipedCards] = useState<Card[]>([]);
 
-  const callback = (item) => {
-    console.log(item);
+  const  callback = async (item) => {
+    var userInfo =  await getUserInfo();
+    try {
+      userInfo = await getUserInfo();
+      var existingMap = userInfo.get('trees');
+      matchName = item.name
+      const matchMessages = [];
+      let newMap = {...existingMap, [matchName]: matchMessages};
+      userInfo.set('trees', newMap);
+      setUserInfo(userInfo);
+
+
+
+    } catch {
+      console.log("Bruh moment, promise error!")
+    }
+
+
   }
 
   return (
@@ -31,7 +49,7 @@ const Home = () => {
           ref={(newSwiper): void => setSwiper(newSwiper)}
         >
           {DEMO.map((item) => (
-            <Card key={item.id} onSwipedLeft={() => callback(item)
+            <Card key={item.id} onSwipedRight={() => callback(item)
             }>
               <CardItem
                 hasActions
